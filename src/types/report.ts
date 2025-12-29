@@ -1,7 +1,7 @@
 import { Report } from '@prisma/client';
 
 export interface PaginatedReports {
-  data: Report[];
+  reports: Report[];
   meta: {
     total: number;
     page: number;

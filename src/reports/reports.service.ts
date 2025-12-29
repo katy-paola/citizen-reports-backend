@@ -12,7 +12,7 @@ export class ReportsService {
   async findAllReports(page = 1, pageSize = 10): Promise<PaginatedReports> {
     const skip = (page - 1) * pageSize;
 
-    const [data, total] = await Promise.all([
+    const [reports, total] = await Promise.all([
       this.prisma.report.findMany({
         skip,
         take: pageSize,
@@ -21,7 +21,7 @@ export class ReportsService {
       this.prisma.report.count(),
     ]);
     return {
-      data,
+      reports,
       meta: {
         total,
         page,
