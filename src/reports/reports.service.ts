@@ -32,13 +32,15 @@ export class ReportsService {
   }
 
   async findReportById(id: number): Promise<Report | null> {
-    const report = this.prisma.report.findUnique({
+    const report = await this.prisma.report.findUnique({
       where: {
         id,
       },
     });
 
-    if (report === null) console.log('Report not found');
+    if (!report) {
+      throw new NotFoundException('Report not found');
+    }
 
     return report;
   }
