@@ -1,11 +1,13 @@
-import { IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class CreateReportDto {
   @IsString()
-  @MinLength(5)
+  @IsNotEmpty({ message: 'Title is required' })
+  @MinLength(5, { message: 'Title must have at least 5 characters' })
   title: string;
 
   @IsString()
-  @MinLength(10)
+  @IsNotEmpty({ message: 'Description is required' })
+  @MinLength(10, { message: 'Description must have at least 10 characters' })
   description: string;
 }

@@ -72,6 +72,12 @@ export class ReportsService {
   }
 
   async deleteReport(id: number): Promise<Report> {
+    const report = await this.prisma.report.findUnique({
+      where: { id },
+    });
+    if (!report) {
+      throw new NotFoundException('Report not found');
+    }
     return this.prisma.report.delete({
       where: {
         id,
