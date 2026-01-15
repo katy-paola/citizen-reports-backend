@@ -16,7 +16,7 @@ export class ReportsService {
       this.prisma.report.findMany({
         skip,
         take: pageSize,
-        orderBy: { createdAt: 'desc' },
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       }),
       this.prisma.report.count(),
     ]);
