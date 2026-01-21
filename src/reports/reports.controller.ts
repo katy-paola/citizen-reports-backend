@@ -12,9 +12,9 @@ import {
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from 'src/auth/guards/admin.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CsrfGuard } from 'src/auth/guards/csrf.guard';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('api/reports')
@@ -44,15 +44,14 @@ export class ReportsController {
     return this.reportsService.createReport(data);
   }
 
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, CsrfGuard)
   @Put(':id')
   async updateReport(@Param('id') id: string, @Body() data: UpdateReportDto) {
     return this.reportsService.updateReport(Number(id), data);
   }
 
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, CsrfGuard)
   @Delete(':id')
-  @UseGuards(AuthGuard('jwt'), AdminGuard)
   async deleteReport(@Param('id') id: string) {
     return this.reportsService.deleteReport(Number(id));
   }
