@@ -29,7 +29,7 @@ async function bootstrap() {
     },
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
-    allowedHeaders: 'Content-Type, Authorization',
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
   });
   app.useGlobalPipes(
     new ValidationPipe({
