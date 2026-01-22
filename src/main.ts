@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://citizen-reports.vercel.app/',
+  'https://citizen-reports.vercel.app',
 ];
 
 async function bootstrap() {
