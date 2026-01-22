@@ -31,6 +31,11 @@ export class AuthController {
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 1000 * 60 * 60 * 24,
     });
+
+    console.log('Login attempt:', body.email);
+    console.log('Access Token Cookie set:', res.getHeader('Set-Cookie'));
+    console.log('CSRF Token Cookie set:', csrfToken);
+
     return { success: true };
   }
 
